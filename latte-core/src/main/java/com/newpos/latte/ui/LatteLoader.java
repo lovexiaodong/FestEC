@@ -23,7 +23,10 @@ public class LatteLoader {
     private static final ArrayList<AppCompatDialog> LOADER = new ArrayList<>();
 
     private static final String DEFAULT_LOADER = LoaderStyle.BallClipRotateMultipleIndicator.name();
-    private static void showLoading(Context context, String type){
+    public static void showLoading(Context context, Enum<LoaderStyle> style){
+        showLoading(context, style.name());
+    }
+    public static void showLoading(Context context, String type){
         final AppCompatDialog dialog = new AppCompatDialog(context, R.style.dialog);
         final AVLoadingIndicatorView avLoadingIndicatorView = LoaderCreator.create(type, context);
         dialog.setContentView(avLoadingIndicatorView);

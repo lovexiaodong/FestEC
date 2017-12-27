@@ -1,10 +1,15 @@
 package com.newpos.latte.net;
 
+import android.content.Context;
+
 import com.newpos.latte.net.callback.IError;
 import com.newpos.latte.net.callback.IFailure;
 import com.newpos.latte.net.callback.IRequest;
 import com.newpos.latte.net.callback.ISuccess;
 import com.newpos.latte.net.callback.RequestCallback;
+import com.newpos.latte.ui.LatteLoader;
+import com.newpos.latte.ui.LoaderCreator;
+import com.newpos.latte.ui.LoaderStyle;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -28,6 +33,8 @@ public class RestClient {
     private final IFailure FAILURE;
     private final IError ERROR;
     private final RequestBody BODY;
+    private final LoaderStyle LOADER_STYLE;
+    private final Context CONTEXT;
 
     public RestClient(String url,
                       Map<String, Object> para,
@@ -35,7 +42,9 @@ public class RestClient {
                       ISuccess success,
                       IFailure failure,
                       IError ERROR,
-                      RequestBody body) {
+                      RequestBody body,
+                      LoaderStyle style,
+                      Context context) {
         this.URL = url;
         this.PARAM.putAll(para);
         this.REQUEST = request;
@@ -43,6 +52,8 @@ public class RestClient {
         this.FAILURE = failure;
         this.ERROR = ERROR;
         this.BODY = body;
+        this.LOADER_STYLE = style;
+        this.CONTEXT = context;
     }
 
     public static RestClientBuilder builder(){
@@ -52,6 +63,14 @@ public class RestClient {
     private void request(HttpMethod method){
         final RestfService service = RestCreator.getRestService();
         Call<String> call = null;
+        if(REQUEST != null){
+            REQUEST.onRequestStart();
+        }
+
+        if(LOADER_STYLE != null){
+            LatteLoader.showLoading(CONTEXT, LOADER_STYLE);
+        }
+
         switch(method){
             case GET:
                 call = service.get(URL, PARAM);
@@ -72,7 +91,7 @@ public class RestClient {
     }
 
     private Callback<String> getRequestCallBack(){
-        return new RequestCallback(REQUEST, SUCCESS, FAILURE, ERROR);
+        return new RequestCallback(REQUEST, SUCCESS, FAILURE, ERROR, LOADER_STYLE);
     }
 
     public final void get(){

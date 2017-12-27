@@ -1,9 +1,12 @@
 package com.newpos.latte.net;
 
+import android.content.Context;
+
 import com.newpos.latte.net.callback.IError;
 import com.newpos.latte.net.callback.IFailure;
 import com.newpos.latte.net.callback.IRequest;
 import com.newpos.latte.net.callback.ISuccess;
+import com.newpos.latte.ui.LoaderStyle;
 
 import java.util.WeakHashMap;
 
@@ -23,6 +26,8 @@ public class RestClientBuilder {
     private  IFailure mFailure;
     private  IError mError;
     private  RequestBody mBody;
+    private Context mContext;
+    private LoaderStyle mStyle;
 
     RestClientBuilder(){}
 
@@ -68,8 +73,18 @@ public class RestClientBuilder {
         return this;
     }
 
+    public final RestClientBuilder loader(Context context, LoaderStyle style){
+        this.mContext = context;
+        this.mStyle = style;
+        return this;
+    }
+    public final RestClientBuilder loader(Context context) {
+        this.mContext = context;
+        this.mStyle =  LoaderStyle.BallPulseIndicator;
+        return this;
+    }
 
     public final RestClient builder(){
-        return new RestClient(mUrl, PARAMS, mRequest,mSuccess, mFailure, mError, mBody);
+        return new RestClient(mUrl, PARAMS, mRequest,mSuccess, mFailure, mError, mBody, mStyle, mContext);
     }
 }
