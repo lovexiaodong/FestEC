@@ -5,6 +5,9 @@ import com.joanzapata.iconify.Iconify;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import okhttp3.Interceptor;
 
 /**
  * Created by Administrator on 2017/11/5 0005.
@@ -13,8 +16,10 @@ import java.util.HashMap;
 public class Configurator {
 
     private static final HashMap<String, Object> LATTER_CONFIGRATOR =  new HashMap<>();
-
     private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
+
+    private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
+
     private Configurator(){
         LATTER_CONFIGRATOR.put(ConfigType.CONFIG_READY.name(), false);
     }
@@ -48,6 +53,17 @@ public class Configurator {
         return this;
     }
 
+    public Configurator withInterceptor(Interceptor interceptor){
+        INTERCEPTORS.add(interceptor);
+        LATTER_CONFIGRATOR.put(ConfigType.INTERCEPTOR.name(), INTERCEPTORS);
+        return this;
+    }
+
+    public Configurator withInterceptor(List<Interceptor> interceptors){
+        INTERCEPTORS.addAll(interceptors);
+        LATTER_CONFIGRATOR.put(ConfigType.INTERCEPTOR.name(), INTERCEPTORS);
+        return this;
+    }
     public Configurator withIcon(IconFontDescriptor descriptor){
         ICONS.add(descriptor);
         return this;

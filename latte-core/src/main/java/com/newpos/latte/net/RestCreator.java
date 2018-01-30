@@ -1,11 +1,15 @@
 package com.newpos.latte.net;
 
 import com.newpos.latte.app.ConfigType;
+import com.newpos.latte.app.Configurator;
 import com.newpos.latte.app.Latte;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -39,7 +43,19 @@ public class RestCreator {
     private static final class OkHttpHolder{
         private static final int TIME_OUT = 60;
 
-        private static final OkHttpClient OK_HTTP_CLIENT = new okhttp3.OkHttpClient.Builder()
+        private static final  OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
+
+        private static final OkHttpClient.Builder addInterceptors(){
+            List<Interceptor> interceptors = (List<Interceptor>) Configurator.getLatterConfigs().get(ConfigType.INTERCEPTOR);
+
+            if(interceptors != null && !interceptors.isEmpty()){
+                for (Interceptor interceptor:interceptors) {
+                    BUILDER.addInterceptor(interceptor);
+                }
+            }
+            return BUILDER;
+        }
+        private static final OkHttpClient OK_HTTP_CLIENT = addInterceptors()
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .build();
     }
