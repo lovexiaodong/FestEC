@@ -1,5 +1,7 @@
 package com.newpos.latte.net;
 
+import android.util.Log;
+
 import com.newpos.latte.app.ConfigType;
 import com.newpos.latte.app.Configurator;
 import com.newpos.latte.app.Latte;
@@ -46,8 +48,9 @@ public class RestCreator {
         private static final  OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
 
         private static final OkHttpClient.Builder addInterceptors(){
-            List<Interceptor> interceptors = (List<Interceptor>) Configurator.getLatterConfigs().get(ConfigType.INTERCEPTOR);
+            List<Interceptor> interceptors = (List<Interceptor>) Configurator.getLatterConfigs().get(ConfigType.INTERCEPTOR.name());
 
+            Log.i("MainDelegate", "addInterceptors: " + interceptors.size());
             if(interceptors != null && !interceptors.isEmpty()){
                 for (Interceptor interceptor:interceptors) {
                     BUILDER.addInterceptor(interceptor);

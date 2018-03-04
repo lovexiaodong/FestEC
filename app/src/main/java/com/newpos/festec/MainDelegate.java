@@ -29,13 +29,13 @@ public class MainDelegate extends LatterDelegate {
 
     private void testRestClient(){
         RestClient.builder()
-                .url("http://www.baidu.com")
+                .url("http://127.0.0.1/index")
                 .loader(getContext())
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
 
-//                        Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
                     }
                 })
                 .failure(new IFailure() {
