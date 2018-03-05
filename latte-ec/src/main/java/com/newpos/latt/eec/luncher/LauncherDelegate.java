@@ -9,6 +9,8 @@ import com.newpos.latt.eec.R;
 import com.newpos.latt.eec.R2;
 import com.newpos.latte.activitys.ProxyActivity;
 import com.newpos.latte.delegates.LatterDelegate;
+import com.newpos.latte.ui.launcher.LauncherTag;
+import com.newpos.latte.util.storage.LattePreference;
 import com.newpos.latte.util.timer.BaseTimerTask;
 import com.newpos.latte.util.timer.ITimerListerner;
 
@@ -29,7 +31,11 @@ public class LauncherDelegate extends LatterDelegate implements ITimerListerner{
 
     @OnClick(R2.id.tv_lumcher_timer)
     void onClickLuncherTimer(){
-
+        if(mTimer != null){
+            mTimer.cancel();
+            mTimer = null;
+            startLauncherScrolled();
+        }
     }
 
     private Timer mTimer = null;
@@ -51,6 +57,13 @@ public class LauncherDelegate extends LatterDelegate implements ITimerListerner{
             initTimer();
     }
 
+    private void startLauncherScrolled(){
+        if(!LattePreference.getAppFlag(LauncherTag.FIRST_LAUNCHER_TAG.name())){
+            start(new LauncherScrolledDelegate(), SINGLETASK);
+        }
+
+    }
+
     @Override
     public void onTimer() {
         _mActivity.runOnUiThread(new Runnable() {
@@ -63,6 +76,7 @@ public class LauncherDelegate extends LatterDelegate implements ITimerListerner{
                         if(mTimer != null){
                             mTimer.cancel();
                             mTimer = null;
+                            startLauncherScrolled();
                         }
                     }
                 }
