@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 
 import com.newpos.latt.eec.luncher.LauncherDelegate;
 import com.newpos.latt.eec.luncher.LauncherScrolledDelegate;
+import com.newpos.latt.eec.sign.SignUpdelegate;
 import com.newpos.latte.activitys.ProxyActivity;
 import com.newpos.latte.delegates.LatterDelegate;
 
@@ -23,6 +24,6 @@ public class MainActivity extends ProxyActivity {
 
     @Override
     public LatterDelegate setRootDelegate() {
-        return new LauncherDelegate();
+        return new SignUpdelegate();
     }
 }
