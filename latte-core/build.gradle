@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
 
 android {
     compileSdkVersion 26
@@ -55,6 +56,13 @@ dependencies {
     compile 'com.bigkoo:convenientbanner:2.0.5'
 
     compile 'com.alibaba:fastjson:1.2.46'
+
+    //日志管理
+    compile 'com.orhanobut:logger:2.1.1'
+
+    //GreenDAO
+    compile 'org.greenrobot:greendao-generator:3.2.0'
+    compile 'org.greenrobot:greendao:3.2.0'
 
 
 

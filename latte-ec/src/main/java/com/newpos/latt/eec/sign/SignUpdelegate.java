@@ -54,6 +54,11 @@ public class SignUpdelegate extends LatterDelegate {
         }
     }
 
+    @OnClick(R2.id.tv_sign_in)
+    void onClickSignIn(){
+        start(new SignInDelegate());
+    }
+
 
     private boolean checkForm(){
         final String name  = mName.getText().toString();
