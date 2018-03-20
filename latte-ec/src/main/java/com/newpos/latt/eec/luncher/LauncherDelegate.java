@@ -1,5 +1,6 @@
 package com.newpos.latt.eec.luncher;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -8,7 +9,11 @@ import android.widget.TextView;
 import com.newpos.latt.eec.R;
 import com.newpos.latt.eec.R2;
 import com.newpos.latte.activitys.ProxyActivity;
+import com.newpos.latte.app.AccountManager;
+import com.newpos.latte.app.IUserChecker;
 import com.newpos.latte.delegates.LatterDelegate;
+import com.newpos.latte.ui.launcher.IlauncherListener;
+import com.newpos.latte.ui.launcher.LauncherListenerTag;
 import com.newpos.latte.ui.launcher.LauncherTag;
 import com.newpos.latte.util.storage.LattePreference;
 import com.newpos.latte.util.timer.BaseTimerTask;
@@ -38,8 +43,17 @@ public class LauncherDelegate extends LatterDelegate implements ITimerListerner{
         }
     }
 
+    private IlauncherListener mLauncherListener;
     private Timer mTimer = null;
     private int mCount = 5;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if(activity instanceof IlauncherListener){
+            mLauncherListener = (IlauncherListener) activity;
+        }
+    }
 
     private void initTimer(){
         mTimer = new Timer();
@@ -60,6 +74,23 @@ public class LauncherDelegate extends LatterDelegate implements ITimerListerner{
     private void startLauncherScrolled(){
         if(!LattePreference.getAppFlag(LauncherTag.FIRST_LAUNCHER_TAG.name())){
             start(new LauncherScrolledDelegate(), SINGLETASK);
+        }else{
+            AccountManager.checkAccount(new IUserChecker() {
+                @Override
+                public void onSignIn() {
+
+                    if(mLauncherListener != null){
+                        mLauncherListener.launcherFinished(LauncherListenerTag.SIGNEND);
+                    }
+                }
+
+                @Override
+                public void onNoSignIn() {
+                    if(mLauncherListener != null){
+                        mLauncherListener.launcherFinished(LauncherListenerTag.NOT_SIGNED);
+                    }
+                }
+            });
         }
 
     }

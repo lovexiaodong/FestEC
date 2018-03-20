@@ -1,5 +1,6 @@
 package com.newpos.latt.eec.sign;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.newpos.latt.eec.R;
 import com.newpos.latt.eec.R2;
+import com.newpos.latte.app.ISignListener;
 import com.newpos.latte.delegates.LatterDelegate;
 import com.newpos.latte.net.RestClient;
 import com.newpos.latte.net.callback.ISuccess;
@@ -36,6 +38,16 @@ public class SignUpdelegate extends LatterDelegate {
     @BindView(R2.id.edit_sign_up_re_password)
     AppCompatEditText mRePassword = null;
 
+    private ISignListener mISignListener = null;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if(activity instanceof ISignListener){
+            mISignListener = (ISignListener) activity;
+        }
+    }
+
     @OnClick(R2.id.btn_sign_up)
     void onClickSignUp(){
         if(checkForm()){
@@ -50,6 +62,18 @@ public class SignUpdelegate extends LatterDelegate {
                     })
                     .builder();*/
 
+           String respoent = "{" +
+                   "  \"code\": 0," +
+                   "  \"message\": \"OK\"," +
+                   "  \"data\": { " +
+                   "    \"userId\": 1, " +
+                   "    \"name\": \"猿猿\", " +
+                   "    \"avatar\": \"http://wx.qlogo.cn/mmopen/guWqj0vybsIHxY2BIqqI3iaSHcbWZXiaSQysU0JKwmqjqMw8Uhia6AribBBynqnr9qxVOTkaUMnAnzqvXYjEDctsoXxzeQ2ibqWt0/0\", " +
+                   "    \"gender\": \"男\", " +
+                   "    \"address\": \"西安\" " +
+                   "  }}";
+
+           SignHander.onSignUp(respoent, mISignListener);
             Toast.makeText(_mActivity, "注册成功！", Toast.LENGTH_SHORT).show();
         }
     }

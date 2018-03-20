@@ -1,6 +1,5 @@
 package com.newpos.latte.app;
 
-import android.app.Application;
 import android.content.Context;
 
 import java.util.HashMap;
