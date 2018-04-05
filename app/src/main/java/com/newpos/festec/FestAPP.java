@@ -27,6 +27,8 @@ public class FestAPP extends Application {
 
                 .withIcon(new FontECModel())
                 .withInterceptor(new DebugInterceptor("index", R.raw.test))
+                .withWeChatAppId("")
+                .withWeChatSecret("")
                 .configure();
 
         Logger.addLogAdapter(new AndroidLogAdapter());

@@ -64,6 +64,10 @@ dependencies {
     compile 'org.greenrobot:greendao-generator:3.2.0'
     compile 'org.greenrobot:greendao:3.2.0'
 
+    //微信登录
+    //noinspection GradleDynamicVersion
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+
 
 
 

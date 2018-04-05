@@ -1,5 +1,7 @@
 package com.newpos.latte.app;
 
+import android.app.Activity;
+
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 
@@ -56,6 +58,19 @@ public class Configurator {
     public Configurator withInterceptor(Interceptor interceptor){
         INTERCEPTORS.add(interceptor);
         LATTER_CONFIGRATOR.put(ConfigType.INTERCEPTOR.name(), INTERCEPTORS);
+        return this;
+    }
+    public Configurator withWeChatAppId(String appId){
+        LATTER_CONFIGRATOR.put(ConfigType.WE_CHAT_APP_ID.name(), appId);
+        return this;
+    }
+
+    public Configurator withWeChatSecret(String secret){
+        LATTER_CONFIGRATOR.put(ConfigType.WE_CHAT_APP_SECRET.name(), secret);
+        return this;
+    }
+    public Configurator withActivity(Activity activity){
+        LATTER_CONFIGRATOR.put(ConfigType.ACTIVITY.name(), activity);
         return this;
     }
 

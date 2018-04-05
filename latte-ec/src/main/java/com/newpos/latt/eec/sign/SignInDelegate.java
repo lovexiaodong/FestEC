@@ -14,6 +14,8 @@ import com.newpos.latte.delegates.LatterDelegate;
 import com.newpos.latte.net.RestClient;
 import com.newpos.latte.net.callback.ISuccess;
 import com.newpos.latte.util.log.LatteLogger;
+import com.newpos.latte.wechat.LetteWeChat;
+import com.newpos.latte.wechat.callbacks.IWeChatSignInCallBacks;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -66,6 +68,16 @@ public class SignInDelegate extends LatterDelegate {
     @OnClick(R2.id.tv_sign_up)
     void onClickSignUp(){
         start(new SignUpdelegate());
+    }
+
+    @OnClick(R2.id.icon_sign_in_wechat)
+    void onClickWeChat(){
+        LetteWeChat.getInstance().onSignInSucess(new IWeChatSignInCallBacks() {
+            @Override
+            public void onSignInSucess(String userInfo) {
+
+            }
+        }).signIn();
     }
 
     private boolean checkForm(){

@@ -1,6 +1,7 @@
 package com.newpos.latte.app;
 
 import android.content.Context;
+import android.content.pm.ConfigurationInfo;
 
 import java.util.HashMap;
 
@@ -18,8 +19,15 @@ public final class Latte {
     public static HashMap<String, Object> getConfigration(){
         return Configurator.getInstance().getLatterConfigs();
     }
+    public static <T> T getConfigration(ConfigType type){
+        return Configurator.getInstance().getConfigration(type);
+    }
 
     public static Context getApplicationContext(){
         return (Context) getConfigration().get(ConfigType.APPLICAION_CONTEXT.name());
+    }
+
+    public static Configurator getConfigurator(){
+        return Configurator.getInstance();
     }
 }

@@ -1,15 +1,24 @@
 package com.newpos.latte.wechat.template;
 
-import com.newpos.latte.activitys.ProxyActivity;
-import com.newpos.latte.delegates.LatterDelegate;
+import com.newpos.latte.wechat.BaseWXEntryActivity;
+import com.newpos.latte.wechat.LetteWeChat;
 
 /**
  * Created by Administrator on 2018/3/23 0023.
  */
 
-public class WXEntryTemplate extends ProxyActivity {
+public class WXEntryTemplate extends BaseWXEntryActivity {
+
     @Override
-    public LatterDelegate setRootDelegate() {
-        return null;
+    public void onSignInSucess(String userInfo) {
+
+        LetteWeChat.getInstance().getSignInCallBack().onSignInSucess(userInfo);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        finish();
+        overridePendingTransition(0, 0);
     }
 }
