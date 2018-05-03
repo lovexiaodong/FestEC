@@ -1,6 +1,7 @@
 package com.newpos.latte.app;
 
 import android.app.Activity;
+import android.os.Handler;
 
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
@@ -22,8 +23,11 @@ public class Configurator {
 
     private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
 
+    private static final Handler HANDLER = new Handler();
+
     private Configurator(){
         LATTER_CONFIGRATOR.put(ConfigType.CONFIG_READY.name(), false);
+        LATTER_CONFIGRATOR.put(ConfigType.HANDLER.name(), HANDLER);
     }
 
     public static Configurator getInstance(){

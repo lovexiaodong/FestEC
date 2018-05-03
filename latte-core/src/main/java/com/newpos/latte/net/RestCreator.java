@@ -6,7 +6,6 @@ import com.newpos.latte.app.ConfigType;
 import com.newpos.latte.app.Configurator;
 import com.newpos.latte.app.Latte;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
@@ -50,7 +49,7 @@ public class RestCreator {
         private static final OkHttpClient.Builder addInterceptors(){
             List<Interceptor> interceptors = (List<Interceptor>) Configurator.getLatterConfigs().get(ConfigType.INTERCEPTOR.name());
 
-            Log.i("MainDelegate", "addInterceptors: " + interceptors.size());
+            Log.i("MainDelegate", "addInterceptors: " + (interceptors == null ? null: interceptors.size()));
             if(interceptors != null && !interceptors.isEmpty()){
                 for (Interceptor interceptor:interceptors) {
                     BUILDER.addInterceptor(interceptor);

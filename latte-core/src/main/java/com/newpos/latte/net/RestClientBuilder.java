@@ -116,7 +116,7 @@ public class RestClientBuilder {
         return this;
     }
 
-    public final RestClient builder(){
+    public final RestClient build(){
         return new RestClient(mUrl, PARAMS, mRequest,mSuccess, mFailure, mError, mBody, mFile, mDownloadDir, mName, mExtention,mStyle, mContext);
     }
 }

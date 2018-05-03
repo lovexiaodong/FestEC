@@ -26,7 +26,7 @@ public class FestAPP extends Application {
                 .withIcon(new FontAwesomeModule())
 
                 .withIcon(new FontECModel())
-                .withInterceptor(new DebugInterceptor("index", R.raw.test))
+//                .withInterceptor(new DebugInterceptor("index", R.raw.test))
                 .withWeChatAppId("")
                 .withWeChatSecret("")
                 .configure();

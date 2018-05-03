@@ -51,7 +51,7 @@ public class SignUpdelegate extends LatterDelegate {
     @OnClick(R2.id.btn_sign_up)
     void onClickSignUp(){
         if(checkForm()){
-           /* RestClient.builder()
+           /* RestClient.build()
                     .url("sign_up")
                     .params("","")
                     .success(new ISuccess() {
@@ -60,7 +60,7 @@ public class SignUpdelegate extends LatterDelegate {
 
                         }
                     })
-                    .builder();*/
+                    .build();*/
 
            String respoent = "{" +
                    "  \"code\": 0," +

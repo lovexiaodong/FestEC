@@ -2,6 +2,7 @@ package com.newpos.latte.app;
 
 import android.content.Context;
 import android.content.pm.ConfigurationInfo;
+import android.os.Handler;
 
 import java.util.HashMap;
 
@@ -25,6 +26,10 @@ public final class Latte {
 
     public static Context getApplicationContext(){
         return (Context) getConfigration().get(ConfigType.APPLICAION_CONTEXT.name());
+    }
+
+    public static Handler getHandler(){
+        return (Handler) getConfigration().get(ConfigType.HANDLER.name());
     }
 
     public static Configurator getConfigurator(){

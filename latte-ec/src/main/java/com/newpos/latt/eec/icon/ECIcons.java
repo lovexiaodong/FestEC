@@ -7,9 +7,9 @@ import com.joanzapata.iconify.Icon;
  */
 
 public enum  ECIcons implements Icon {
-    ICON_WEIXIN('\ue693'),
-    ICON_SAOMA('\ue610'),
-    ICON_ZHIFUBAO('\ue502');
+    icon_weichat('\ue693'),
+    icon_scan('\ue610'),
+    icon_ali_pay('\ue502');
 
     private char character;
 

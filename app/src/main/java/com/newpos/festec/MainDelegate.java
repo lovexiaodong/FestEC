@@ -50,7 +50,7 @@ public class MainDelegate extends LatterDelegate {
 
                     }
                 })
-                .builder()
+                .build()
                 .get();
     }
 }

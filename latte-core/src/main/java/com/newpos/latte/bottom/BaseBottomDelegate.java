@@ -21,7 +21,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import butterknife.BindView;
-import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
@@ -30,7 +29,7 @@ import me.yokeyword.fragmentation.SupportFragment;
 
 public abstract class BaseBottomDelegate extends LatterDelegate implements View.OnClickListener{
 
-    private final ArrayList<BottomItemDelegate> ITEMS_DELEGTES = new ArrayList<>();
+    private final ArrayList<BottomItemDelegate> ITEMS_DELEGATESTES = new ArrayList<>();
     private final ArrayList<BottomTabBean> ITEMS_BEANS = new ArrayList<>();
 
     private final LinkedHashMap<BottomTabBean, BottomItemDelegate> ITEMS = new LinkedHashMap<>();
@@ -74,7 +73,7 @@ public abstract class BaseBottomDelegate extends LatterDelegate implements View.
             final BottomTabBean key = item.getKey();
             final BottomItemDelegate value = item.getValue();
             ITEMS_BEANS.add(key);
-            ITEMS_DELEGTES.add(value);
+            ITEMS_DELEGATESTES.add(value);
         }
     }
 
@@ -109,7 +108,7 @@ public abstract class BaseBottomDelegate extends LatterDelegate implements View.
 
         }
 
-        SupportFragment[] fragment = ITEMS_DELEGTES.toArray(new SupportFragment[size]);
+        SupportFragment[] fragment = ITEMS_DELEGATESTES.toArray(new SupportFragment[size]);
         loadMultipleRootFragment(R.id.bottom_bar_container, mIndexDelegate, fragment);
     }
 
@@ -135,7 +134,7 @@ public abstract class BaseBottomDelegate extends LatterDelegate implements View.
         itemIcon.setTextColor(mClickColor);
         itemText.setTextColor(mClickColor);
 
-        showHideFragment(ITEMS_DELEGTES.get(tag), ITEMS_DELEGTES.get(mCurrentDelegate));
+        showHideFragment(ITEMS_DELEGATESTES.get(tag), ITEMS_DELEGATESTES.get(mCurrentDelegate));
 
         mCurrentDelegate = tag;
     }

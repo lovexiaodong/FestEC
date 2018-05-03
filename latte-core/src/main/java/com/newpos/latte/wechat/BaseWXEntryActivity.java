@@ -5,7 +5,6 @@ import com.newpos.latte.net.RestClient;
 import com.newpos.latte.net.callback.IError;
 import com.newpos.latte.net.callback.ISuccess;
 import com.newpos.latte.util.log.LatteLogger;
-import com.newpos.latte.wechat.BaseWXActivity;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
@@ -61,7 +60,7 @@ public abstract class BaseWXEntryActivity extends BaseWXActivity {
                                 .append("zh_CN");
                         getUserInfo(userInfo.toString());
                     }
-                }).builder().get();
+                }).build().get();
     }
 
     private void getUserInfo(String url){
@@ -80,7 +79,7 @@ public abstract class BaseWXEntryActivity extends BaseWXActivity {
 
                     }
                 })
-                .builder()
+                .build()
                 .get();
     }
 }
